@@ -1,6 +1,6 @@
 import mlx.core as mx
 import argparse
-from decoding import naive_generate, generate
+from decoding import naive_generate, generate, speculative_decoding
 from llama import load_model
 
 if __name__ == "__main__":
@@ -47,3 +47,6 @@ if __name__ == "__main__":
     print("------")
     print("KV Caching")
     generate(args.prompt, tokenizer, model, temp=args.temp, max_tokens=args.max_tokens, write_every=args.write_every)
+    print("------")
+    print("Speculative Decoding")
+    speculative_decoding(args.prompt, tokenizer, model, draft_model, temp=args.temp, max_tokens=args.max_tokens, write_every=args.write_every, n_draft=args.max_tokens)
